@@ -17,7 +17,7 @@ const ManageTask = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/tasks");
+        const response = await axios.get("https://task-management-application-server-phi.vercel.app/tasks");
         setTasks(response.data); // Assuming response.data is an array of tasks
       } catch (error) {
         console.error("Error fetching tasks", error);
@@ -30,7 +30,7 @@ const ManageTask = () => {
   // Handle delete task
   const handleDelete = async (taskId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+      const response = await axios.delete(`https://task-management-application-server-phi.vercel.app/${taskId}`);
       console.log(response.data); // Log the response data
       setTasks(tasks.filter((task) => task._id !== taskId));
       toast.success('Task deleted successfully!'); // Show success toast
@@ -52,7 +52,7 @@ const ManageTask = () => {
   // Handle updating the task
   const handleUpdate = async () => {
     try {
-      const response = await axios.put(`http://localhost:5000/tasks/${currentTask._id}`, currentTask);
+      const response = await axios.put(`https://task-management-application-server-phi.vercel.app/${currentTask._id}`, currentTask);
       console.log(response.data); // Log the response data
       setTasks(tasks.map((task) => (task._id === currentTask._id ? currentTask : task))); // Update the task in the state
       setModalVisible(false); // Close the modal
@@ -158,8 +158,6 @@ const ManageTask = () => {
       )}
 
       <ToastContainer /> {/* Add ToastContainer to display toasts */}
-      {/* <Footer>
-      </Footer> */}
     </div>
   );
 };

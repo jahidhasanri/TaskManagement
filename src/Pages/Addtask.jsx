@@ -3,7 +3,6 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
 import Navbar from "../Components/Navbar";
 import "react-toastify/dist/ReactToastify.css"; // Import styles
-import Footer from "../Components/Footer";
 
 const AddTask = () => {
   const [task, setTask] = useState({
@@ -47,7 +46,7 @@ const AddTask = () => {
     console.log(newTask);
 
     try {
-      const response = await axios.post("http://localhost:5000/tasks", newTask);
+      const response = await axios.post("https://task-management-application-server-phi.vercel.app/tasks", newTask);
       toast.success("Task added successfully!");
 
       setTask({
@@ -112,8 +111,7 @@ const AddTask = () => {
           </button>
         </form>
       </div>
-      <ToastContainer /> {/* Add ToastContainer here */}
-      <Footer></Footer>
+      <ToastContainer /> 
     </div>
   );
 };

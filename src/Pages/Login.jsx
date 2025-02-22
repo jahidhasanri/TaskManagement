@@ -65,7 +65,7 @@ const from = location.state?.from?.pathname || "/home"
   
 
   return (
-    <div className='mt-20'>
+    <div className=''>
       <div className="hero bg-base-200  mt-[100px] md:mt-[5px]">
         <div className="hero-content flex-col lg:flex-row-reverse">
           

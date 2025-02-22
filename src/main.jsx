@@ -12,10 +12,13 @@ import Register from './Pages/Register.jsx';
 import Home from './Pages/Home.jsx';
 import AddTask from './Pages/Addtask.jsx';
 import ManageTask from './Pages/ManageTask.jsx';
+import PrivateRoute from './Provider/PrivateRoute.jsx';
+import Error from './Pages/Error.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element:<Login></Login>,
+    errorElement:<Error></Error>
   },
   {
     path:'/register',
@@ -23,21 +26,21 @@ const router = createBrowserRouter([
   },
   {
     path:'/home',
-    element:<Home></Home>,
+    element:<PrivateRoute><Home></Home></PrivateRoute>,
   },
   {
     path:'/addtask',
-    element:<AddTask></AddTask>
+    element:<PrivateRoute><AddTask></AddTask></PrivateRoute>
   },
   {
     path:'/managetask',
-    element:<ManageTask></ManageTask>
+    element:<PrivateRoute><ManageTask></ManageTask></PrivateRoute>
   }
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
   <AuthProvider>
       <RouterProvider router={router} />
-  </AuthProvider>,
+  </AuthProvider>
   </StrictMode>
 )
