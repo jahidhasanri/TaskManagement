@@ -18,48 +18,48 @@ const ManageTask = () => {
     const fetchTasks = async () => {
       try {
         const response = await axios.get("https://task-management-application-server-phi.vercel.app/tasks");
-        setTasks(response.data); // Assuming response.data is an array of tasks
+        setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks", error);
       }
     };
 
     fetchTasks();
-  }, []); // Empty dependency array ensures this runs once when the component mounts
+  }, []);
 
   // Handle delete task
   const handleDelete = async (taskId) => {
     try {
-      const response = await axios.delete(`https://task-management-application-server-phi.vercel.app/${taskId}`);
-      console.log(response.data); // Log the response data
+      await axios.delete(`https://task-management-application-server-phi.vercel.app/tasks/${taskId}`);
       setTasks(tasks.filter((task) => task._id !== taskId));
-      toast.success('Task deleted successfully!'); // Show success toast
+      toast.success('Task deleted successfully!');
     } catch (error) {
       console.error("Error deleting task", error);
-      toast.error('Failed to delete task!'); // Show error toast
+      toast.error('Failed to delete task!');
     }
   };
 
+
   // Handle edit task
-  const handleEdit = (taskId) => {
+   // Handle edit task
+   const handleEdit = (taskId) => {
     const task = tasks.find((t) => t._id === taskId);
     if (task) {
       setCurrentTask(task);
-      setModalVisible(true); // Show the modal
+      setModalVisible(true);
     }
   };
 
   // Handle updating the task
   const handleUpdate = async () => {
     try {
-      const response = await axios.put(`https://task-management-application-server-phi.vercel.app/${currentTask._id}`, currentTask);
-      console.log(response.data); // Log the response data
-      setTasks(tasks.map((task) => (task._id === currentTask._id ? currentTask : task))); // Update the task in the state
-      setModalVisible(false); // Close the modal
-      toast.success('Task updated successfully!'); // Show success toast
+      const response = await axios.put(`https://task-management-application-server-phi.vercel.app/tasks/${currentTask._id}`, currentTask);
+      setTasks(tasks.map((task) => (task._id === currentTask._id ? response.data : task)));
+      setModalVisible(false);
+      toast.success('Task updated successfully!');
     } catch (error) {
       console.error("Error updating task", error);
-      toast.error('Failed to update task!'); // Show error toast
+      toast.error('Failed to update task!');
     }
   };
 
